@@ -12,26 +12,26 @@ web3 = Web3(Web3.HTTPProvider(bsc_testnet))
 #web3.middleware_onion.inject(geth_poa_middleware, layer=0)  #  Inject poa middleware
 
 account = web3.eth.account.privateKeyToAccount(account_private_key)
+balance = web3.fromWei(web3.eth.getBalance(account_address),'ether')
+nonce = web3.eth.getTransactionCount(account_address)
 print("----------------------------------------------------------------------------------------------")
 print("Address : ",account.address)
 print("--------")
-print("Balance : ",web3.fromWei(web3.eth.getBalance(account_address),'ether'))
+print("Balance : ",balance)
 print("--------")
-print("Total Transaction : ",web3.eth.getTransactionCount(account_address))
+print("Total Transaction : ",nonce)
 print("--------")
 print("Total Checksum address : ",web3.toChecksumAddress(account_address))
 print("----------------------------------------------------------------------------------------------")
 
-nonce = web3.eth.getTransactionCount(account_address)
-balance = web3.fromWei(web3.eth.getBalance(account_address),'ether')
 tx = {
     'nonce': nonce,
-    'value': web3.toWei(0.001,'ether'),
+    'value': web3.toWei(0.1,'ether'),
     'to': account_address_2,
-    'gas': 21000,
-    'gasPrice': web3.toWei(40,'gwei') 
+    'gas': 100000,
+    'gasPrice': web3.toWei(100,'gwei') 
 }
 
 signed_tx = web3.eth.account.signTransaction(tx,account_private_key)
 tx_transaction = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-print("Transaction Done")
+print("Transaction success with hash : ",web3.toHex(tx_transaction))
