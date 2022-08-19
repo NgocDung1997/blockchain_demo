@@ -18,10 +18,7 @@ if (block is not None and block.transactions is not None) :
     for txHash in block.transactions :
         tx = web3.eth.getTransaction(txHash)
         if(tx["from"] == account_address): 
-            print("Transaction : ",tx)
-        # print("Transaction from: ",tx["from"])
-        # print("Transaction to: ",tx["to"])   
-        # print("Value : ",web3.fromWei(tx["value"],'ether'))      
+            print("Transaction : ",tx)     
 
 contract_instance = web3.eth.contract(address = contract_address,abi = abi)
 token_supply = contract_instance.functions.totalSupply().call()

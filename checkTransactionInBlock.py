@@ -21,9 +21,3 @@ def transactionChecker(account_address):
                 print("Transaction Id ",tx["hash"]) 
                 print("From ",tx["from"]) 
                 print("Value ",tx["value"]) 
-
-# def transactionChecker2(account_address):
-#     block = web3.eth.getBlock('latest')
-#     if (block is not None and block.transactions is not None) :
-#         print(block)
-# transactionChecker2('account_address')
