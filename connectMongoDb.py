@@ -1,4 +1,4 @@
-def get_database():
+def get_database(db_name):
     from pymongo import MongoClient
     import pymongo
 
@@ -7,11 +7,11 @@ def get_database():
     from pymongo import MongoClient
     client = MongoClient(CONNECTION_STRING)
 
-    return client['prl-box-prod-mainnet']
+    return client[db_name]
     
 if __name__ == "__main__":    
-    
-    db_mainnet = get_database()
-    boxes = db_mainnet['boxes'].find().limit(10)
-    for box in boxes:
-        print(box['_id']," | ",box['tokenId']," | ",box['ownerAddress'])
+    db_name = 'prl-box-prod-testnet-public-2'
+    db_testnet = get_database(db_name)
+    rewards = db_testnet['rewards'].find({'reward_to_owner':"0x743A38774Ce5dFE808551f5900EfE87743b398Fc"}).limit(10)
+    for reward in rewards:
+        print("Id : ",reward["_id"])
