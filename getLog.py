@@ -40,8 +40,9 @@ options = {
         'toBlock': 5000
     }
 
-transfer_filter = contract_instance.events.Transfer.createFilter(fromBlock=22167048,toBlock=latest,argument_filters={'to': contract_address_testnet})
-transfer_filter = contract_instance.events.Transfer.createFilter(fromBlock=22167048,toBlock=latest,argument_filters={'to': account_address_receive})
+#transfer_filter = contract_instance.events.Transfer.createFilter(fromBlock=22167048,toBlock=latest,argument_filters={'to': contract_address_testnet})
+transfer_filter = contract_instance.events.Transfer.createFilter(fromBlock=22167048,toBlock=latest,argument_filters={"to": account_address_receive})
+#transfer_filter = contract_instance.events.Transfer.createFilter(fromBlock=22167048,toBlock=latest,argument_filters={"Interacted With (To)": contract_address_testnet})
 logs = transfer_filter.get_all_entries()
 
 print("Total Transaction : ",len(logs))
@@ -49,6 +50,6 @@ for log in logs:
     log_json = Web3.toJSON(log)
     print(log_json)
     print("From : ",log['args']['from'])
-    print("To : ",log['args']['to'])
+    print(  "To : ",log['args']['to'])
     print("Value : ",log['args']['value']) 
     print("--------")
