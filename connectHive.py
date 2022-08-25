@@ -1,6 +1,6 @@
 import pyspark
 from pyspark.sql import SparkSession
-from pyspark.sql import Row
+from pyspark.sql import SQLContext
 appName= "Hive Pyspark"
 url_hive= "jdbc:hive2://51.161.115.210:10000"
 user_hive="debian"
@@ -17,9 +17,10 @@ jdbcDF = spark.read \
     .option("user", user_hive) \
     .option("password", pw_hive) \
     .load()
+jdbcDF.createOrReplaceTempView("boxes")
+SparkSession.sql("select * from std")
+# boxesDf = jdbcDF.select("*")
 
-boxesDf = jdbcDf.option("dbtable",boxes).load()
-
-boxesDf.select("*")
+# boxesDf.show()
 
 
