@@ -3,6 +3,7 @@ import extruct as ex
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
+import chompjs
 PATH_DRIVER = "/Users/macmini/Documents/Work station/Python/Webscaping/BscScan/chromedriver"
 URL_PRL_PARAGON = "https://testnet.theparallel.io/market/shop/paragon"
 
